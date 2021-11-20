@@ -2,8 +2,15 @@ cmake_minimum_required(VERSION 3.21.2)
 project(c17) 
 add_executable(${PROJECT_NAME} c17.cpp)
 add_subdirectory(routines)
-target_include_directories(${PROJECT_NAME} PUBLIC include)
-target_link_libraries(${PROJECT_NAME} routines)
+add_subdirectory(external/glfw)
+target_include_directories(${PROJECT_NAME} 
+    PUBLIC include 
+    PUBLIC external/glfw/include
+)
+target_link_libraries(${PROJECT_NAME} 
+    PUBLIC routines
+    PUBLIC external/glfw/src
+)
 
 add_compile_options(-std=c++17)
 set(CMAKE_CXX_STANDARD 17)
