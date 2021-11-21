@@ -1,0 +1,5 @@
+#define c17_VERSION_MAJOR @c17_VERSION_MAJOR@
+#define c17_VERSION_MINOR @c17_VERSION_MINOR@
+#ifdef USE_GLFW
+    #include <GLGFW/glfw3.h>
+#endif
