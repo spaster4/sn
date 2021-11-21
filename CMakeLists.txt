@@ -1,16 +1,37 @@
 cmake_minimum_required(VERSION 3.21.2)
-project(c17) 
+project(c17 VERSION 1.0) 
+
+configure_file(c17Config.h.in c17Config.h)
+
 add_executable(${PROJECT_NAME} c17.cpp)
 add_subdirectory(routines)
-add_subdirectory(external/glfw)
+
+option(USE_GLFW "GL Graphics Library" ON)
+if(USE_GLFW)
+    message(STATUS "    Generating glfw library")
+    add_subdirectory(external/glfw)
+    list(APPEND EXTRA_INCLUDES_DIRS "external/glfw/include")
+    list(APPEND EXTRA_LINK_DIRS "external/glfw/")
+    list(APPEND EXTRA_LINK_LIBS "glfw")
+endif()
+
 target_include_directories(${PROJECT_NAME} 
     PUBLIC include 
-    PUBLIC external/glfw/include
+    PUBLIC ${PROJECT_BINARY_DIR}
+    ${EXTRA_INCLUDES_DIRS}
 )
+
+target_link_directories(${PROJECT_NAME}
+    PUBLIC routines 
+    PUBLIC ${PROJECT_BINARY_DIR}
+    ${EXTRA_LINK_DIRS}
+)
+
 target_link_libraries(${PROJECT_NAME} 
     PUBLIC routines
-    PUBLIC external/glfw/src
+    ${EXTRA_LINK_LIBS}
 )
+
 
 add_compile_options(-std=c++17)
 set(CMAKE_CXX_STANDARD 17)

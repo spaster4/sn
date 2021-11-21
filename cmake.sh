@@ -1,2 +1,2 @@
 #!/bin/bash
-cmake -S . -B build
+cmake -DUSE_GLFW=OFF  -S . -B build
