@@ -23,7 +23,9 @@ void doList() {
 
 int main(int argc, char *argv[]) {
     cout << argv[0] << " Version " << c17_VERSION_MAJOR << '.' << c17_VERSION_MINOR << endl;
-    doOption();
+    // doOption();
+    // do_any();
+    do_callable();
     // doList();
 }
 
