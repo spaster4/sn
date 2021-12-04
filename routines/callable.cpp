@@ -1,7 +1,17 @@
 #include <iostream>
 #include <tuple>
+#include <list>
+#include <vector>
+#include <map>
+#include <initializer_list>
+#include <type_traits>
 
 using namespace std;
+
+class BB {
+public:
+    BB(int x = 100) { cout << x << endl;} 
+};
 
 auto halfAgain = [](int x) { return (x + x/2); };
 auto tripleAdd = [](int x, int y, int z) { return (x+y+z); };
@@ -22,6 +32,23 @@ void forwarding( t && arg ) {
     std::cout << "by simple passing: ";
     overloaded( arg );
 }
+
+template <class T>
+void func2( std::initializer_list<T> list )
+{
+    for( auto elem : list )
+    {
+        cout << elem << endl ;
+    }
+}
+
+template <class T>
+list<T> func(initializer_list<T> list )
+{
+    return list;
+}
+
+
 
 void do_callable() {
     int w = 5;
@@ -60,6 +87,39 @@ void do_callable() {
     cout << apply(halfAgain, tup) << endl;
     cout << apply(tripleAdd, tup2) << endl;
     // forwarding(5);
+    // func(5,6,7);
+    string str1 = "abc";
+    string str2 = "def";
+    func2( {10, 20, 30, 40 }) ;
+    auto il = func<int>( {10, 20, 30, 40 }) ;
+    for ( auto x : il) { cout << x << endl; }
+    func2({str1, str2});
+    auto sl = func({str1, str2});
+    for ( auto x : sl) { cout << x << endl; }
+    list<char> cl = initializer_list<char>{'a','b','c', 'd'};
+    vector<char> cv = initializer_list<char>{'a','b','c', 'd'};
+    cout << "cv[2]: " << cv[2] << endl;
+    for ( auto x : cl) { cout << x << endl; }
+    list<BB> classList = initializer_list<BB>{BB(1), BB(2), BB(3), BB(4)};
+    for(auto x : classList)  { cout << "WWWW" << endl; }
+    map<string,string>fav_lang = {{"A", "B"},{"C","D"},{"E", "F"}};
+
+    for (const auto & [ name, language ] : fav_lang) {   
+        cout << name << ":" << language << endl;
+    }
+
+
+    for (const auto &c : cl) { cout << c; }; cout << endl;
+    list<byte>bl = initializer_list<byte>{byte('a'), byte('b')};
+    list<byte>bl2 = { byte('a'), byte('b'), byte('c')};
+    for(auto i : bl) {cout << char(i); } ; cout << endl;
+    for(auto i : bl2) {cout << char(i); } ; cout << endl;
+    if(int u=5; u%2 == 0) { 
+        cout << "true" << endl; 
+    } 
+    else { 
+        cout << "false" << endl; 
+    }
     return;
 }
 

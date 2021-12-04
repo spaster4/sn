@@ -2,10 +2,11 @@
 #include <vector>
 #include <list>
 #include <c17.h> 
-#include <c17Config.h>
+#include "c17Config.h"
 // #include <GLFW/glfw3.h>
 using namespace std;
 
+extern void do_date(); 
 
 void doList() {
     vector<int>vi({1,2,3,4,5});
@@ -25,8 +26,13 @@ int main(int argc, char *argv[]) {
     cout << argv[0] << " Version " << c17_VERSION_MAJOR << '.' << c17_VERSION_MINOR << endl;
     // doOption();
     // do_any();
-    do_callable();
+    // do_callable();
+    // do_map();
     // doList();
+    // do_factory();
+    // do_threads();  
+    do_date();  
+    return 0;
 }
 
 

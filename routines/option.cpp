@@ -1,5 +1,7 @@
 #include <iostream>
+#include <string>
 #include <optional>
+#include <functional>
 
 using namespace std;
 

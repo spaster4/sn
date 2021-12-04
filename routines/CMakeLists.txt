@@ -1,2 +1,2 @@
 
-add_library(routines option.cpp any.cpp callable.cpp)
+add_library(routines any.cpp option.cpp callable.cpp map.cpp factory.cpp threads.cpp dates.cpp)
